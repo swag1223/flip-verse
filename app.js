@@ -22,6 +22,7 @@ io.sockets.on("connection", function (socket) {
   socket.emit("setId", { id: socket.id });
 
   socket.on("disconnect", function () {
+    console.log(`${socket.id} disconnected`);
     socket.broadcast.emit("deletePlayer", { id: socket.id });
   });
 

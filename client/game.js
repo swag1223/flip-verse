@@ -674,6 +674,11 @@ class PlayerLocal extends Player {
       return false;
     });
 
+    $("#leave-world-btn").click(function (e) {
+      socket.disconnect();
+      return false;
+    });
+
     this.socket = socket;
   }
 

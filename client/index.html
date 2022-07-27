@@ -95,6 +95,12 @@
         padding: 10px;
       }
 
+      #leave-world-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
       .hide {
         display: none;
       }
@@ -105,15 +111,18 @@
     <div id="home-page" class="">
       <button onclick="joinWorld()">join-room</button>
     </div>
-    <div id="message">
+    <!-- <div id="message">
       <p id="message_text"></p>
       <button id="message_ok">OK</button>
-    </div>
+    </div> -->
     <div id="chat">
       <form id="msg-form" action="">
         <input id="m" autocomplete="off" /><button>Send</button>
       </form>
     </div>
+
+    <button id="leave-world-btn" class="hide">leave world</button>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/92/three.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -125,9 +134,11 @@
     <script src="game.js"></script>
     <script>
       const homePageDiv = document.getElementById("home-page");
+      const leaveRoomBtn = document.getElementById("leave-world-btn");
       function joinWorld() {
         const game = new Game();
         homePageDiv.classList.add("hide");
+        leaveRoomBtn.classList.remove("hide");
       }
     </script>
   </body>
