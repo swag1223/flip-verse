@@ -521,6 +521,52 @@ class Player {
     const loader = new THREE.FBXLoader();
     const player = this;
 
+    loader.load(`${game.assetsPath}fbx/chair.fbx`, function (object) {
+      object.name = "chair";
+      object.position.set(3122, 20, -1500);
+      object.scale.set(0.5, 0.5, 0.5);
+      console.log(object);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        object.rotation.y += 0.03;
+      }
+      animate();
+
+      game.scene.add(object);
+    });
+
+    loader.load(`${game.assetsPath}fbx/VendingMachine.fbx`, function (object) {
+      object.name = "VendingMachine";
+      object.position.set(3500, 20, -1500);
+      console.log(object);
+      function animate() {
+        requestAnimationFrame(animate);
+
+        object.rotation.z += 0.03;
+      }
+      animate();
+
+      game.scene.add(object);
+    });
+
+    loader.load(`${game.assetsPath}fbx/Treadmill.fbx`, function (object) {
+      object.name = "Treadmill";
+      object.position.set(4000, 20, -1500);
+      object.scale.set(15, 15, 15);
+      console.log(object);
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        object.rotation.y += 0.03;
+      }
+      animate();
+
+      game.scene.add(object);
+    });
+
     loader.load(`${game.assetsPath}fbx/people/${model}.fbx`, function (object) {
       object.mixer = new THREE.AnimationMixer(object);
       player.root = object;
