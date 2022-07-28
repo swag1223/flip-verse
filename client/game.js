@@ -172,9 +172,10 @@ class Game {
 
   loadEnvironment(loader) {
     const game = this;
+    game.colliders = [];
     loader.load(`${this.assetsPath}fbx/town.fbx`, function (object) {
       game.environment = object;
-      game.colliders = [];
+
       game.scene.add(object);
       object.traverse(function (child) {
         if (child.isMesh) {
@@ -186,6 +187,121 @@ class Game {
             child.receiveShadow = true;
           }
         }
+      });
+
+      loader.load(`${game.assetsPath}fbx/chair.fbx`, function (object) {
+        object.name = "chair";
+        object.position.set(6800, 30, -300);
+        object.scale.set(0.3, 0.3, 0.3);
+        console.log(object);
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          object.rotation.y += 0.03;
+        }
+        animate();
+
+        object.traverse(function (child) {
+          game.colliders.push(child);
+        });
+
+        game.scene.add(object);
+      });
+
+      loader.load(
+        `${game.assetsPath}fbx/VendingMachine.fbx`,
+        function (object) {
+          object.name = "VendingMachine";
+          object.position.set(700, 30, -500);
+          console.log(object);
+          function animate() {
+            requestAnimationFrame(animate);
+            object.rotation.z += 0.04;
+          }
+          animate();
+          object.traverse(function (child) {
+            game.colliders.push(child);
+          });
+
+          game.scene.add(object);
+        }
+      );
+
+      loader.load(`${game.assetsPath}fbx/Treadmill.fbx`, function (object) {
+        object.name = "Treadmill";
+        object.position.set(3500, 20, -1500);
+        object.scale.set(20, 20, 20);
+        console.log(object);
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          object.rotation.y += 0.04;
+        }
+        animate();
+        object.traverse(function (child) {
+          game.colliders.push(child);
+        });
+
+        game.scene.add(object);
+      });
+
+      loader.load(`${game.assetsPath}fbx/lamp.fbx`, function (object) {
+        object.name = "lamp";
+        object.position.set(8000, 20, -2000);
+        object.scale.set(0.3, 0.3, 0.3);
+        console.log(object);
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          object.rotation.y += 0.04;
+        }
+        animate();
+        object.traverse(function (child) {
+          game.colliders.push(child);
+        });
+
+        game.scene.add(object);
+      });
+
+      loader.load(`${game.assetsPath}fbx/headphones.fbx`, function (object) {
+        object.name = "headphones";
+        object.position.set(5500, 20, -1000);
+        object.scale.set(0.5, 0.5, 0.5);
+        console.log(object);
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          object.rotation.y += 0.04;
+        }
+        animate();
+        object.traverse(function (child) {
+          game.colliders.push(child);
+        });
+
+        game.scene.add(object);
+      });
+
+      loader.load(`${game.assetsPath}fbx/shoe.fbx`, function (object) {
+        object.name = "shoe";
+        object.position.set(1500, 20, -1000);
+        object.scale.set(10, 10, 10);
+        console.log(object);
+
+        function animate() {
+          requestAnimationFrame(animate);
+
+          object.rotation.y += 0.04;
+        }
+        animate();
+        object.traverse(function (child) {
+          game.colliders.push(child);
+        });
+
+        game.scene.add(object);
       });
 
       const tloader = new THREE.CubeTextureLoader();
@@ -520,52 +636,6 @@ class Player {
 
     const loader = new THREE.FBXLoader();
     const player = this;
-
-    loader.load(`${game.assetsPath}fbx/chair.fbx`, function (object) {
-      object.name = "chair";
-      object.position.set(3122, 20, -1500);
-      object.scale.set(0.5, 0.5, 0.5);
-      console.log(object);
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        object.rotation.y += 0.03;
-      }
-      animate();
-
-      game.scene.add(object);
-    });
-
-    loader.load(`${game.assetsPath}fbx/VendingMachine.fbx`, function (object) {
-      object.name = "VendingMachine";
-      object.position.set(3500, 20, -1500);
-      console.log(object);
-      function animate() {
-        requestAnimationFrame(animate);
-
-        object.rotation.z += 0.03;
-      }
-      animate();
-
-      game.scene.add(object);
-    });
-
-    loader.load(`${game.assetsPath}fbx/Treadmill.fbx`, function (object) {
-      object.name = "Treadmill";
-      object.position.set(4000, 20, -1500);
-      object.scale.set(15, 15, 15);
-      console.log(object);
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        object.rotation.y += 0.03;
-      }
-      animate();
-
-      game.scene.add(object);
-    });
 
     loader.load(`${game.assetsPath}fbx/people/${model}.fbx`, function (object) {
       object.mixer = new THREE.AnimationMixer(object);
