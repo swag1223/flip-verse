@@ -12,7 +12,7 @@ app.use(express.static("./client/v3"));
 
 app.get("/", function (req, res) {
   console.log(__dirname);
-  res.sendFile(__dirname + "./client/v3/index.html");
+  res.sendFile(__dirname + "./client/index.html");
 });
 
 io.sockets.on("connection", function (socket) {

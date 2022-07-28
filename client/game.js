@@ -676,6 +676,7 @@ class PlayerLocal extends Player {
 
     $("#leave-world-btn").click(function (e) {
       socket.disconnect();
+      location.reload();
       return false;
     });
 
