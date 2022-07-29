@@ -7,7 +7,9 @@ if (data) {
 } else {
   cart = [];
 }
-
+function onFocus(e) {
+  e.target.focus();
+}
 class Game {
   constructor() {
     if (!Detector.webgl) Detector.addGetWebGLMessage();
@@ -716,13 +718,10 @@ class Game {
         chat.classList.remove("hide");
         console.log(chat.classList);
         // this.activeCamera = this.cameras.chat;
-        document.getElementById("m").addEventListener(
-          "touchstart",
-          function (e) {
-            e.target.focus();
-          },
-          { passive: false, capture: true }
-        );
+        document.getElementById("m").addEventListener("touchstart", onFocus, {
+          passive: false,
+          capture: true,
+        });
       }
     } else {
       //Is the chat panel visible?
@@ -1004,6 +1003,15 @@ class PlayerLocal extends Player {
         message: $("#m").val(),
       });
       $("#m").val("");
+
+      if ("ontouchstart" in window) {
+        document
+          .getElementById("m")
+          .removeEventListener("touchstart", onFocus, {
+            passive: false,
+            capture: true,
+          });
+      }
       return false;
     });
 
