@@ -1,4 +1,3 @@
-$.mobile.zoom.disable();
 let products = {};
 let cart;
 let data = localStorage.getItem("cart");
