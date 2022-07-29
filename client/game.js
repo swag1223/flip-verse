@@ -703,28 +703,41 @@ class Game {
           return true;
         }
       });
+      var shouldChatVisible = false;
       if (players.length > 0) {
+        shouldChatVisible = true;
         const player = players[0];
         console.log(`onMouseDown: player ${player.id}`);
         this.speechBubble.player = player;
         this.speechBubble.update("");
         this.scene.add(this.speechBubble.mesh);
         this.chatSocketId = player.id;
-        chat.style.bottom = "0px";
+
+        chat.classList.remove("hide");
+        console.log(chat.classList);
         this.activeCamera = this.cameras.chat;
+        document.getElementById("m").addEventListener(
+          "touchstart",
+          function (e) {
+            e.target.focus();
+          },
+          { passive: false, capture: true }
+        );
       }
     } else {
       //Is the chat panel visible?
       if (
-        chat.style.bottom == "0px" &&
-        window.innerHeight - event.clientY > 40
+        // chat.style.bottom == "0px" &&
+        // window.innerHeight - event.clientY > 40
+        !shouldChatVisible
       ) {
+        console.log("delete");
         console.log("onMouseDown: No player found");
         if (this.speechBubble.mesh.parent !== null)
           this.speechBubble.mesh.parent.remove(this.speechBubble.mesh);
         delete this.speechBubble.player;
         delete this.chatSocketId;
-        chat.style.bottom = "-50px";
+        chat.classList.add("hide");
         this.activeCamera = this.cameras.back;
       } else {
         console.log("onMouseDown: typing");
@@ -977,6 +990,7 @@ class PlayerLocal extends Player {
 
     socket.on("chat message", function (data) {
       document.getElementById("chat").style.bottom = "0px";
+
       const player = game.getRemotePlayerById(data.id);
       game.speechBubble.player = player;
       game.chatSocketId = player.id;
@@ -993,7 +1007,16 @@ class PlayerLocal extends Player {
       return false;
     });
 
-    $("#leave-world-btn").click(function (e) {
+    $("#send-btn").bind("touchstart click", function (e) {
+      socket.emit("chat message", {
+        id: game.chatSocketId,
+        message: $("#m").val(),
+      });
+      $("#m").val("");
+      return false;
+    });
+
+    $("#leave-world-btn").bind("touchstart click", function (e) {
       window.location = window.location.origin;
       socket.disconnect();
       return false;
