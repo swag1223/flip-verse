@@ -168,7 +168,7 @@ class Game {
     if ("ontouchstart" in window) {
       window.addEventListener(
         "touchstart",
-        (event) => game.touchFun(event),
+        (event) => game.onMouseDown(event),
         false
       );
     } else {
@@ -180,10 +180,6 @@ class Game {
     }
 
     window.addEventListener("resize", () => game.onWindowResize(), false);
-  }
-
-  touchFun(event) {
-    document.getElementById("test").innerText = event.target;
   }
 
   loadEnvironment(loader) {
@@ -637,6 +633,8 @@ class Game {
     if (intersects.length > 0) {
       const object = intersects[0].object;
       const btn = document.getElementById("add-to-cart-btn");
+
+      document.getElementById("test").innerText = object.name;
 
       console.log(btn.classList);
 
