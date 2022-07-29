@@ -715,7 +715,7 @@ class Game {
 
         chat.classList.remove("hide");
         console.log(chat.classList);
-        this.activeCamera = this.cameras.chat;
+        // this.activeCamera = this.cameras.chat;
         document.getElementById("m").addEventListener(
           "touchstart",
           function (e) {
