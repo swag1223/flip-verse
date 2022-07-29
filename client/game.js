@@ -195,6 +195,18 @@ class Game {
         object.scale.set(0.3, 0.3, 0.3);
         console.log(object);
 
+        object.speechBubble = new SpeechBubble(
+          game,
+          `Chair
+        Price: Rs.625`,
+          150
+        );
+        object.speechBubble.mesh.position.set(
+          object.position.x + 150,
+          object.position.y + 150,
+          object.position.z
+        );
+
         function animate() {
           requestAnimationFrame(animate);
 
@@ -215,6 +227,19 @@ class Game {
           object.name = "VendingMachine";
           object.position.set(700, 30, -500);
           console.log(object);
+
+          object.speechBubble = new SpeechBubble(
+            game,
+            `Mini Almirah
+          Price: Rs.849`,
+            150
+          );
+          object.speechBubble.mesh.position.set(
+            object.position.x + 150,
+            object.position.y + 150,
+            object.position.z
+          );
+
           function animate() {
             requestAnimationFrame(animate);
             object.rotation.z += 0.04;
@@ -233,6 +258,17 @@ class Game {
         object.position.set(3500, 20, -1500);
         object.scale.set(20, 20, 20);
         console.log(object);
+        object.speechBubble = new SpeechBubble(
+          game,
+          `Treadmill
+        Price: Rs.1500`,
+          150
+        );
+        object.speechBubble.mesh.position.set(
+          object.position.x + 100,
+          object.position.y + 150,
+          object.position.z
+        );
 
         function animate() {
           requestAnimationFrame(animate);
@@ -253,6 +289,18 @@ class Game {
         object.scale.set(0.3, 0.3, 0.3);
         console.log(object);
 
+        object.speechBubble = new SpeechBubble(
+          game,
+          `Lamp
+        Price: Rs.499`,
+          150
+        );
+        object.speechBubble.mesh.position.set(
+          object.position.x + 100,
+          object.position.y + 150,
+          object.position.z
+        );
+
         function animate() {
           requestAnimationFrame(animate);
 
@@ -272,6 +320,18 @@ class Game {
         object.scale.set(0.5, 0.5, 0.5);
         console.log(object);
 
+        object.speechBubble = new SpeechBubble(
+          game,
+          `Headphones
+        Price: Rs.780`,
+          150
+        );
+        object.speechBubble.mesh.position.set(
+          object.position.x + 100,
+          object.position.y + 150,
+          object.position.z
+        );
+
         function animate() {
           requestAnimationFrame(animate);
 
@@ -290,6 +350,18 @@ class Game {
         object.position.set(1500, 20, -1000);
         object.scale.set(10, 10, 10);
         console.log(object);
+
+        object.speechBubble = new SpeechBubble(
+          game,
+          `Women Sandals
+        Price: Rs.520`,
+          150
+        );
+        object.speechBubble.mesh.position.set(
+          object.position.x + 100,
+          object.position.y + 150,
+          object.position.z
+        );
 
         function animate() {
           requestAnimationFrame(animate);
