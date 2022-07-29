@@ -163,16 +163,20 @@ class Game {
     this.renderer.shadowMap.enabled = true;
     this.container.appendChild(this.renderer.domElement);
 
-    document.getElementById("test").innerText = "ontouchstart" in window;
+    console.log(window);
+    console.log("doc", document);
 
     if ("ontouchstart" in window) {
-      window.addEventListener(
+      document.addEventListener(
         "touchstart",
         (event) => game.onMouseDown(event),
-        false
+        {
+          capture: true,
+          passive: false,
+        }
       );
     } else {
-      window.addEventListener(
+      document.addEventListener(
         "mousedown",
         (event) => game.onMouseDown(event),
         false
@@ -622,8 +626,16 @@ class Game {
     // calculate mouse position in normalized device coordinates
     // (-1 to +1) for both components
     const mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / this.renderer.domElement.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / this.renderer.domElement.clientHeight) * 2 + 1;
+
+    if ("ontouchstart" in window) {
+      mouse.x = +(event.changedTouches[0].pageX / window.innerWidth) * 2 + -1;
+
+      mouse.y = -(event.changedTouches[0].pageY / window.innerHeight) * 2 + 1;
+    } else {
+      mouse.x = (event.clientX / this.renderer.domElement.clientWidth) * 2 - 1;
+      mouse.y =
+        -(event.clientY / this.renderer.domElement.clientHeight) * 2 + 1;
+    }
 
     const raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, this.camera);
@@ -634,17 +646,13 @@ class Game {
       const object = intersects[0].object;
       const btn = document.getElementById("add-to-cart-btn");
 
-      document.getElementById("test").innerText = object.name;
-
-      console.log(btn.classList);
-
       if (object.isProduct) {
-        console.log(object.parentObj.position.x);
         btn.classList.toggle("hide");
         btn.innerText = `Add ${object.parentObj.name} to cart`;
         btn.addEventListener("click", handleClick);
 
         function handleClick() {
+          console.log("click called");
           let alreadyPresent = false;
           for (var i = 0; i < cart.length; i++) {
             if (cart[i].id === object.parentObj.id) alreadyPresent = true;
@@ -661,9 +669,9 @@ class Game {
               : "Item added to cart",
             duration: 3000,
             close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true,
             style: {
               background: alreadyPresent ? "red" : "green",
             },
