@@ -182,6 +182,10 @@ class Game {
     window.addEventListener("resize", () => game.onWindowResize(), false);
   }
 
+  touchFun(event) {
+    document.getElementById("test").innerText = event.target;
+  }
+
   loadEnvironment(loader) {
     const game = this;
     game.colliders = [];
