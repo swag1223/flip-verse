@@ -4,13 +4,8 @@ let data = localStorage.getItem("cart");
 
 if (data) {
   cart = JSON.parse(data);
-  displayList();
 } else {
   cart = [];
-}
-
-function displayList() {
-  console.log("cart: ", cart);
 }
 
 class Game {
@@ -209,8 +204,8 @@ class Game {
         object.name = "Chair";
         object.price = "625";
 
-        products[object.ID] = {
-          id: object.ID,
+        products[object.id] = {
+          id: object.id,
           name: object.name,
           price: object.price,
         };
@@ -236,10 +231,9 @@ class Game {
           object.rotation.y += 0.03;
         }
         animate();
-
+        console.log("chair", object);
         object.traverse(function (child) {
-          child.parentId = object.ID;
-          child.parentName = object.name;
+          child.parentObj = object;
           child.isProduct = true;
           game.colliders.push(child);
         });
@@ -253,8 +247,8 @@ class Game {
           object.name = "Mini Almirah";
           object.price = "1049";
 
-          products[object.ID] = {
-            id: object.ID,
+          products[object.id] = {
+            id: object.id,
             name: object.name,
             price: object.price,
           };
@@ -279,8 +273,7 @@ class Game {
           }
           animate();
           object.traverse(function (child) {
-            child.parentId = object.ID;
-            child.parentName = object.name;
+            child.parentObj = object;
             child.isProduct = true;
             game.colliders.push(child);
           });
@@ -293,8 +286,8 @@ class Game {
         object.name = "Treadmill";
         object.price = "1500";
 
-        products[object.ID] = {
-          id: object.ID,
+        products[object.id] = {
+          id: object.id,
           name: object.name,
           price: object.price,
         };
@@ -320,8 +313,7 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
-          child.parentId = object.ID;
-          child.parentName = object.name;
+          child.parentObj = object;
           child.isProduct = true;
           game.colliders.push(child);
         });
@@ -333,8 +325,8 @@ class Game {
         object.name = "Lamp";
         object.price = "499";
 
-        products[object.ID] = {
-          id: object.ID,
+        products[object.id] = {
+          id: object.id,
           name: object.name,
           price: object.price,
         };
@@ -361,8 +353,7 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
-          child.parentId = object.ID;
-          child.parentName = object.name;
+          child.parentObj = object;
           child.isProduct = true;
           game.colliders.push(child);
         });
@@ -373,8 +364,8 @@ class Game {
       loader.load(`${game.assetsPath}fbx/headphones.fbx`, function (object) {
         object.name = "headphones";
         object.price = "780";
-        products[object.ID] = {
-          id: object.ID,
+        products[object.id] = {
+          id: object.id,
           name: object.name,
           price: object.price,
         };
@@ -402,8 +393,7 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
-          child.parentId = object.ID;
-          child.parentName = object.name;
+          child.parentObj = object;
           child.isProduct = true;
           game.colliders.push(child);
         });
@@ -414,8 +404,8 @@ class Game {
       loader.load(`${game.assetsPath}fbx/shoe.fbx`, function (object) {
         object.name = "Women's Sandal";
         object.price = "890";
-        products[object.ID] = {
-          id: object.ID,
+        products[object.id] = {
+          id: object.id,
           name: object.name,
           price: object.price,
         };
@@ -442,8 +432,7 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
-          child.parentId = object.ID;
-          child.parentName = object.name;
+          child.parentObj = object;
           child.isProduct = true;
           game.colliders.push(child);
         });
@@ -641,16 +630,23 @@ class Game {
 
     if (intersects.length > 0) {
       const object = intersects[0].object;
-      console.log(object);
+      const btn = document.getElementById("add-to-cart-btn");
+
+      console.log(btn.classList);
+
       if (object.isProduct) {
+        console.log(object.parentObj.position.x);
+        btn.classList.toggle("hide");
+        btn.innerText = `Add ${object.parentObj.name} to cart`;
+        btn.addEventListener("click", handleClick);
+
         function handleClick() {
           let alreadyPresent = false;
-          console.log("here", cart);
           for (var i = 0; i < cart.length; i++) {
-            if (cart[i].id === object.parentId) alreadyPresent = true;
+            if (cart[i].id === object.parentObj.id) alreadyPresent = true;
           }
           if (!alreadyPresent) {
-            cart = [...cart, products[object.parentId]];
+            cart = [...cart, products[object.parentObj.id]];
             localStorage.setItem("cart", JSON.stringify(cart));
           }
 
@@ -671,11 +667,8 @@ class Game {
           btn.removeEventListener("click", handleClick);
           btn.classList.toggle("hide");
         }
-        const btn = document.getElementById("add-to-cart-btn");
-        btn.classList.toggle("hide");
-        btn.innerText = `Add ${object.parentName} to cart`;
-
-        btn.addEventListener("click", handleClick);
+      } else {
+        btn.classList.add("hide");
       }
 
       const players = this.remotePlayers.filter(function (player) {
