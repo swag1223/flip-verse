@@ -46,8 +46,17 @@
   </head>
 
   <body>
-    <a href="/world" type="button">join-room</a>
+    <input id="username" autocomplete="off" required />
+    <button type="button" onclick="handleClick()">join-room</button>
 
-    <script></script>
+    <script>
+      let usernameField = document.getElementById("username");
+      usernameField.value = localStorage.getItem("username", username);
+      function handleClick() {
+        const username = usernameField.value;
+        localStorage.setItem("username", username);
+        window.location = window.location.origin + "/world";
+      }
+    </script>
   </body>
 </html>

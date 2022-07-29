@@ -1,6 +1,7 @@
 let products = {};
 let cart;
 let data = localStorage.getItem("cart");
+const USERNAME = localStorage.getItem("username");
 
 if (data) {
   cart = JSON.parse(data);
@@ -617,6 +618,7 @@ class Game {
   }
 
   onMouseDown(event) {
+    const player = this.player;
     if (
       this.remoteColliders === undefined ||
       this.remoteColliders.length == 0 ||
@@ -653,16 +655,15 @@ class Game {
         btn.innerText = `Add ${object.parentObj.name} to cart`;
 
         if ("ontouchstart" in window) {
-          btn.addEventListener("touchstart", handleClick, {
+          btn.addEventListener("touchstart", addToCart, {
             passive: false,
             capture: true,
           });
         } else {
-          btn.addEventListener("click", handleClick);
+          btn.addEventListener("click", addToCart);
         }
 
-        function handleClick() {
-          console.log("click called");
+        function addToCart() {
           let alreadyPresent = false;
           for (var i = 0; i < cart.length; i++) {
             if (cart[i].id === object.parentObj.id) alreadyPresent = true;
@@ -670,6 +671,7 @@ class Game {
           if (!alreadyPresent) {
             cart = [...cart, products[object.parentObj.id]];
             localStorage.setItem("cart", JSON.stringify(cart));
+            player.emitAddedToCart(products[object.parentObj.id]);
           }
 
           console.log("after", cart);
@@ -687,12 +689,12 @@ class Game {
             },
           }).showToast();
           if ("ontouchstart" in window) {
-            btn.removeEventListener("touchstart", handleClick, {
+            btn.removeEventListener("touchstart", addToCart, {
               passive: false,
               capture: true,
             });
           } else {
-            btn.removeEventListener("click", handleClick);
+            btn.removeEventListener("click", addToCart);
           }
           btn.classList.toggle("hide");
         }
@@ -848,6 +850,7 @@ class Player {
     this.colour = colour;
     this.game = game;
     this.animations = this.game.animations;
+    console.log(this.id);
 
     const loader = new THREE.FBXLoader();
     const player = this;
@@ -956,9 +959,12 @@ class Player {
 class PlayerLocal extends Player {
   constructor(game, model) {
     super(game, model);
+    this.username = USERNAME;
 
     const player = this;
+    console.log("player", player);
     const socket = io.connect();
+
     socket.on("setId", function (data) {
       player.id = data.id;
     });
@@ -985,6 +991,20 @@ class PlayerLocal extends Player {
           game.initialisingPlayers.splice(index, 1);
         }
       }
+    });
+
+    socket.on("show added to cart", function (data) {
+      Toastify({
+        text: `${data.username} added ${data.product.name} to his cart`,
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+          background: "blue",
+        },
+      }).showToast();
     });
 
     socket.on("chat message", function (data) {
@@ -1031,6 +1051,7 @@ class PlayerLocal extends Player {
     });
 
     this.socket = socket;
+    this.player = player;
   }
 
   initSocket() {
@@ -1058,6 +1079,13 @@ class PlayerLocal extends Player {
         action: this.action,
       });
     }
+  }
+
+  emitAddedToCart(product) {
+    this.socket.emit("added to cart", {
+      username: this.player.username,
+      product: product,
+    });
   }
 
   move(dt) {

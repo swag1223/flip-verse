@@ -23,7 +23,6 @@ io.sockets.on("connection", function (socket) {
 
   console.log(`${socket.id} connected`);
   socket.emit("setId", { id: socket.id });
-
   socket.on("disconnect", function () {
     console.log(`${socket.id} disconnected`);
     socket.broadcast.emit("deletePlayer", { id: socket.id });
@@ -46,6 +45,10 @@ io.sockets.on("connection", function (socket) {
     socket.userData.z = data.z;
     socket.userData.heading = data.h;
     (socket.userData.pb = data.pb), (socket.userData.action = data.action);
+  });
+
+  socket.on("added to cart", function (data) {
+    socket.broadcast.emit("show added to cart", data);
   });
 
   socket.on("chat message", function (data) {
