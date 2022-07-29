@@ -167,7 +167,7 @@ class Game {
 
     if ("ontouchstart" in window) {
       window.addEventListener(
-        "touchdown",
+        "touchstart",
         (event) => {
           document.getElementById("test").innerText = "touch";
         },
