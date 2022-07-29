@@ -168,7 +168,7 @@ class Game {
     if ("ontouchstart" in window) {
       window.addEventListener(
         "touchstart",
-        (event) => game.onMouseDown(event),
+        (event) => game.touchFun(event),
         false
       );
     } else {
