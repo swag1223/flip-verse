@@ -163,6 +163,8 @@ class Game {
     this.renderer.shadowMap.enabled = true;
     this.container.appendChild(this.renderer.domElement);
 
+    document.getElementById("test").innerText = "ontouchstart" in window;
+
     if ("ontouchstart" in window) {
       window.addEventListener(
         "touchdown",
