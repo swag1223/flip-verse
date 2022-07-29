@@ -649,7 +649,15 @@ class Game {
       if (object.isProduct) {
         btn.classList.toggle("hide");
         btn.innerText = `Add ${object.parentObj.name} to cart`;
-        btn.addEventListener("click", handleClick);
+
+        if ("ontouchstart" in window) {
+          btn.addEventListener("touchstart", handleClick, {
+            passive: false,
+            capture: true,
+          });
+        } else {
+          btn.addEventListener("click", handleClick);
+        }
 
         function handleClick() {
           console.log("click called");
@@ -676,7 +684,14 @@ class Game {
               background: alreadyPresent ? "red" : "green",
             },
           }).showToast();
-          btn.removeEventListener("click", handleClick);
+          if ("ontouchstart" in window) {
+            btn.removeEventListener("touchstart", handleClick, {
+              passive: false,
+              capture: true,
+            });
+          } else {
+            btn.removeEventListener("click", handleClick);
+          }
           btn.classList.toggle("hide");
         }
       } else {
@@ -979,8 +994,8 @@ class PlayerLocal extends Player {
     });
 
     $("#leave-world-btn").click(function (e) {
+      window.location = window.location.origin;
       socket.disconnect();
-      location.reload();
       return false;
     });
 
