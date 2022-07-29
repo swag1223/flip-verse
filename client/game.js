@@ -1,3 +1,18 @@
+let products = {};
+let cart;
+let data = localStorage.getItem("cart");
+
+if (data) {
+  cart = JSON.parse(data);
+  displayList();
+} else {
+  cart = [];
+}
+
+function displayList() {
+  console.log("cart: ", cart);
+}
+
 class Game {
   constructor() {
     if (!Detector.webgl) Detector.addGetWebGLMessage();
@@ -173,6 +188,7 @@ class Game {
   loadEnvironment(loader) {
     const game = this;
     game.colliders = [];
+
     loader.load(`${this.assetsPath}fbx/town.fbx`, function (object) {
       game.environment = object;
 
@@ -190,15 +206,22 @@ class Game {
       });
 
       loader.load(`${game.assetsPath}fbx/chair.fbx`, function (object) {
-        object.name = "chair";
+        object.name = "Chair";
+        object.price = "625";
+
+        products[object.ID] = {
+          id: object.ID,
+          name: object.name,
+          price: object.price,
+        };
         object.position.set(6800, 30, -300);
         object.scale.set(0.3, 0.3, 0.3);
         console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
-          `Chair
-        Price: Rs.625`,
+          `${object.name}
+        Price: Rs.${object.price}`,
           150
         );
         object.speechBubble.mesh.position.set(
@@ -215,6 +238,9 @@ class Game {
         animate();
 
         object.traverse(function (child) {
+          child.parentId = object.ID;
+          child.parentName = object.name;
+          child.isProduct = true;
           game.colliders.push(child);
         });
 
@@ -224,14 +250,21 @@ class Game {
       loader.load(
         `${game.assetsPath}fbx/VendingMachine.fbx`,
         function (object) {
-          object.name = "VendingMachine";
+          object.name = "Mini Almirah";
+          object.price = "1049";
+
+          products[object.ID] = {
+            id: object.ID,
+            name: object.name,
+            price: object.price,
+          };
           object.position.set(700, 30, -500);
           console.log(object);
 
           object.speechBubble = new SpeechBubble(
             game,
-            `Mini Almirah
-          Price: Rs.849`,
+            `${object.name}
+          Price: Rs.${object.price}`,
             150
           );
           object.speechBubble.mesh.position.set(
@@ -246,6 +279,9 @@ class Game {
           }
           animate();
           object.traverse(function (child) {
+            child.parentId = object.ID;
+            child.parentName = object.name;
+            child.isProduct = true;
             game.colliders.push(child);
           });
 
@@ -255,13 +291,20 @@ class Game {
 
       loader.load(`${game.assetsPath}fbx/Treadmill.fbx`, function (object) {
         object.name = "Treadmill";
+        object.price = "1500";
+
+        products[object.ID] = {
+          id: object.ID,
+          name: object.name,
+          price: object.price,
+        };
         object.position.set(3500, 20, -1500);
         object.scale.set(20, 20, 20);
-        console.log(object);
+
         object.speechBubble = new SpeechBubble(
           game,
-          `Treadmill
-        Price: Rs.1500`,
+          `${object.name}
+        Price: Rs.${object.price}`,
           150
         );
         object.speechBubble.mesh.position.set(
@@ -277,6 +320,9 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
+          child.parentId = object.ID;
+          child.parentName = object.name;
+          child.isProduct = true;
           game.colliders.push(child);
         });
 
@@ -284,15 +330,22 @@ class Game {
       });
 
       loader.load(`${game.assetsPath}fbx/lamp.fbx`, function (object) {
-        object.name = "lamp";
+        object.name = "Lamp";
+        object.price = "499";
+
+        products[object.ID] = {
+          id: object.ID,
+          name: object.name,
+          price: object.price,
+        };
         object.position.set(8000, 20, -2000);
         object.scale.set(0.3, 0.3, 0.3);
         console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
-          `Lamp
-        Price: Rs.499`,
+          `${object.name}
+        Price: Rs.${object.price}`,
           150
         );
         object.speechBubble.mesh.position.set(
@@ -308,6 +361,9 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
+          child.parentId = object.ID;
+          child.parentName = object.name;
+          child.isProduct = true;
           game.colliders.push(child);
         });
 
@@ -316,16 +372,23 @@ class Game {
 
       loader.load(`${game.assetsPath}fbx/headphones.fbx`, function (object) {
         object.name = "headphones";
+        object.price = "780";
+        products[object.ID] = {
+          id: object.ID,
+          name: object.name,
+          price: object.price,
+        };
         object.position.set(5500, 20, -1000);
         object.scale.set(0.5, 0.5, 0.5);
         console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
-          `Headphones
-        Price: Rs.780`,
+          `${object.name}
+        Price: Rs.${object.price}`,
           150
         );
+
         object.speechBubble.mesh.position.set(
           object.position.x + 100,
           object.position.y + 150,
@@ -339,6 +402,9 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
+          child.parentId = object.ID;
+          child.parentName = object.name;
+          child.isProduct = true;
           game.colliders.push(child);
         });
 
@@ -346,15 +412,21 @@ class Game {
       });
 
       loader.load(`${game.assetsPath}fbx/shoe.fbx`, function (object) {
-        object.name = "shoe";
+        object.name = "Women's Sandal";
+        object.price = "890";
+        products[object.ID] = {
+          id: object.ID,
+          name: object.name,
+          price: object.price,
+        };
         object.position.set(1500, 20, -1000);
         object.scale.set(10, 10, 10);
         console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
-          `Women Sandals
-        Price: Rs.520`,
+          `${object.name}
+        Price: Rs.${object.price}`,
           150
         );
         object.speechBubble.mesh.position.set(
@@ -370,6 +442,9 @@ class Game {
         }
         animate();
         object.traverse(function (child) {
+          child.parentId = object.ID;
+          child.parentName = object.name;
+          child.isProduct = true;
           game.colliders.push(child);
         });
 
@@ -501,7 +576,7 @@ class Game {
     const game = this;
     //Get all remotePlayers from remoteData array
     const remotePlayers = [];
-    const remoteColliders = [];
+    const remoteColliders = this.colliders;
 
     this.remoteData.forEach(function (data) {
       if (game.player.id != data.id) {
@@ -561,12 +636,48 @@ class Game {
 
     const raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, this.camera);
-
     const intersects = raycaster.intersectObjects(this.remoteColliders);
     const chat = document.getElementById("chat");
 
     if (intersects.length > 0) {
       const object = intersects[0].object;
+      console.log(object);
+      if (object.isProduct) {
+        function handleClick() {
+          let alreadyPresent = false;
+          console.log("here", cart);
+          for (var i = 0; i < cart.length; i++) {
+            if (cart[i].id === object.parentId) alreadyPresent = true;
+          }
+          if (!alreadyPresent) {
+            cart = [...cart, products[object.parentId]];
+            localStorage.setItem("cart", JSON.stringify(cart));
+          }
+
+          console.log("after", cart);
+          Toastify({
+            text: alreadyPresent
+              ? "Item already in cart"
+              : "Item added to cart",
+            duration: 3000,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: alreadyPresent ? "red" : "green",
+            },
+          }).showToast();
+          btn.removeEventListener("click", handleClick);
+          btn.classList.toggle("hide");
+        }
+        const btn = document.getElementById("add-to-cart-btn");
+        btn.classList.toggle("hide");
+        btn.innerText = `Add ${object.parentName} to cart`;
+
+        btn.addEventListener("click", handleClick);
+      }
+
       const players = this.remotePlayers.filter(function (player) {
         if (player.collider !== undefined && player.collider == object) {
           return true;
