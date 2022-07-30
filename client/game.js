@@ -666,7 +666,7 @@ class Game {
         function addToCart() {
           let alreadyPresent = false;
           for (var i = 0; i < cart.length; i++) {
-            if (cart[i].id === object.parentObj.id) alreadyPresent = true;
+            if (cart[i].name === object.parentObj.name) alreadyPresent = true;
           }
           if (!alreadyPresent) {
             cart = [...cart, products[object.parentObj.id]];
