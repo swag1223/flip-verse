@@ -11,7 +11,7 @@ cartCount.forEach((item) => {
 });
 
 const categoryItems = [
-  { img: "dress", name: "Clothes", amount: "53" },
+  { img: "dress", name: "Clothes" },
   {
     img: "shoes",
     name: "Footwear",
