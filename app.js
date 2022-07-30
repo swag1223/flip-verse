@@ -10,12 +10,14 @@ app.use(express.static("./client"));
 app.use(express.static("./client/libs"));
 app.use(express.static("./client/v3"));
 
-app.get("/"),
-  function (req, res) {
-    res.sendFile(__dirname + "/client/index.html");
-  };
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/client/index.html");
+});
 app.get("/world", function (req, res) {
   res.sendFile(__dirname + "/client/world.html");
+});
+app.get("/cart", function (req, res) {
+  res.sendFile(__dirname + "/client/cart.html");
 });
 
 io.sockets.on("connection", function (socket) {

@@ -213,11 +213,13 @@ class Game {
       loader.load(`${game.assetsPath}fbx/chair.fbx`, function (object) {
         object.name = "Chair";
         object.price = "625";
+        object.img = "chair";
 
         products[object.id] = {
           id: object.id,
           name: object.name,
           price: object.price,
+          img: object.img,
         };
         object.position.set(6800, 30, -300);
         object.scale.set(0.3, 0.3, 0.3);
@@ -256,11 +258,13 @@ class Game {
         function (object) {
           object.name = "Mini Almirah";
           object.price = "1049";
+          object.img = "almirah";
 
           products[object.id] = {
             id: object.id,
             name: object.name,
             price: object.price,
+            img: object.img,
           };
           object.position.set(700, 30, -500);
           console.log(object);
@@ -295,11 +299,13 @@ class Game {
       loader.load(`${game.assetsPath}fbx/Treadmill.fbx`, function (object) {
         object.name = "Treadmill";
         object.price = "1500";
+        object.img = "treadmill";
 
         products[object.id] = {
           id: object.id,
           name: object.name,
           price: object.price,
+          img: object.img,
         };
         object.position.set(3500, 20, -1500);
         object.scale.set(20, 20, 20);
@@ -334,11 +340,13 @@ class Game {
       loader.load(`${game.assetsPath}fbx/lamp.fbx`, function (object) {
         object.name = "Lamp";
         object.price = "499";
+        object.img = "lamp";
 
         products[object.id] = {
           id: object.id,
           name: object.name,
           price: object.price,
+          img: object.img,
         };
         object.position.set(8000, 20, -2000);
         object.scale.set(0.3, 0.3, 0.3);
@@ -374,10 +382,12 @@ class Game {
       loader.load(`${game.assetsPath}fbx/headphones.fbx`, function (object) {
         object.name = "headphones";
         object.price = "780";
+        object.img = "headphones";
         products[object.id] = {
           id: object.id,
           name: object.name,
           price: object.price,
+          img: object.img,
         };
         object.position.set(5500, 20, -1000);
         object.scale.set(0.5, 0.5, 0.5);
@@ -414,10 +424,12 @@ class Game {
       loader.load(`${game.assetsPath}fbx/shoe.fbx`, function (object) {
         object.name = "Women's Sandal";
         object.price = "890";
+        object.img = "sandals";
         products[object.id] = {
           id: object.id,
           name: object.name,
           price: object.price,
+          img: object.img,
         };
         object.position.set(1500, 20, -1000);
         object.scale.set(10, 10, 10);

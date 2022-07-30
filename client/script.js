@@ -396,7 +396,7 @@ newProducts.forEach((item) => {
         <p class="price">Rs.${item.newPrice}</p>
         <del>Rs.${item.oldPrice}</del>
       </div>
-      <button class="add-cart-btn" onclick="addToCart(this)" data-item=${param}>add to cart</button>
+      <div class="add-cart-btn-container"><button class="add-cart-btn" onclick="addToCart(this)" data-item=${param}>add to cart</button></div>
     </div>
   </div>`;
 
@@ -502,6 +502,10 @@ function addToCart(event) {
     cart = [...cart, productObj];
     localStorage.setItem("cart", JSON.stringify(cart));
   }
+
+  cartCount.forEach((item) => {
+    item.innerHTML = cart.length;
+  });
 
   Toastify({
     text: alreadyPresent ? "Item already in cart" : "Item added to cart",
