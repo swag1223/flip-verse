@@ -8,6 +8,7 @@ if (data) {
 } else {
   cart = [];
 }
+
 function onFocus(e) {
   e.target.focus();
 }
