@@ -516,9 +516,8 @@ function addToCart(event) {
     stopOnFocus: true,
     style: {
       background: alreadyPresent ? "red" : "green",
-      width: "500px",
       display: "flex",
-      alignItems: "center",
+      width: "max-content",
     },
   }).showToast();
 }

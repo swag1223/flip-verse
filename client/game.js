@@ -699,6 +699,8 @@ class Game {
             stopOnFocus: true,
             style: {
               background: alreadyPresent ? "red" : "green",
+              display: "flex",
+              width: "max-content",
             },
           }).showToast();
           if ("ontouchstart" in window) {
@@ -1016,6 +1018,8 @@ class PlayerLocal extends Player {
         stopOnFocus: true,
         style: {
           background: "blue",
+          display: "flex",
+          width: "max-content",
         },
       }).showToast();
     });

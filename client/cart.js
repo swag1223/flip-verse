@@ -60,9 +60,8 @@ function removeFromCart(event) {
     stopOnFocus: true,
     style: {
       background: "green",
-      width: "500px",
       display: "flex",
-      alignItems: "center",
+      width: "max-content",
     },
     callback: function () {
       location.reload();

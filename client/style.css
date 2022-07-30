@@ -216,7 +216,7 @@ body::-webkit-scrollbar-thumb:hover {
   position: relative;
 }
 
-.header-search-container .search-field {
+.search-field {
   font-size: var(--fs-7);
   color: var(--onyx);
   padding: 10px 15px;
@@ -547,7 +547,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .banner-content {
-  background: hsla(0, 0%, 100%, 0.8);
+  /* background: hsla(0, 0%, 100%, 0.8); */
   position: absolute;
   bottom: 25px;
   left: 25px;
@@ -555,15 +555,18 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 20px 25px;
   -webkit-border-radius: var(--border-radius-md);
   border-radius: var(--border-radius-md);
+  background: rgba(255, 255, 255, 0.444);
 }
 
 .banner-subtitle {
-  color: var(--salmon-pink);
-  font-size: var(--fs-7);
+  color: var(--eerie-black);
+  font-size: 1.3rem;
   font-weight: var(--weight-500);
   text-transform: capitalize;
   letter-spacing: 2px;
   margin-bottom: 10px;
+  margin-top: 30px;
+  font-weight: bolder;
 }
 
 .banner-title {
@@ -1620,6 +1623,7 @@ footer {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     max-width: 320px;
+    background: rgba(255, 255, 255, 0.444);
   }
 
   .banner-subtitle {
@@ -1628,10 +1632,11 @@ footer {
 
   .banner-text {
     display: block;
-    color: var(--sonic-silver);
+    color: rgb(199, 63, 86);
     font-size: var(--fs-7);
     font-weight: var(--weight-500);
     margin-bottom: 10px;
+    font-weight: bolder;
   }
 
   .banner-text b {
@@ -1763,6 +1768,7 @@ footer {
 
   .banner-content {
     background: none;
+    background: rgba(255, 255, 255, 0.444);
   }
 
   /**
@@ -1904,6 +1910,7 @@ footer {
 
   .banner-content {
     max-width: 380px;
+    background: rgba(255, 255, 255, 0.444);
   }
 
   .banner-subtitle {
@@ -2327,6 +2334,7 @@ footer {
   .banner-content {
     left: 75px;
     max-width: 400px;
+    background: rgba(255, 255, 255, 0.444);
   }
 
   .banner-subtitle {
@@ -2666,6 +2674,21 @@ footer {
 .cart-container {
   margin-top: 10px;
 }
+
+.username-form {
+  display: flex;
+  gap: 5px;
+}
+
+.username-field {
+  font-size: var(--fs-7);
+  color: var(--onyx);
+  padding: 10px 15px;
+  padding-right: 50px;
+  border: 1px solid var(--cultured);
+  -webkit-border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md);
+}
 /**
    * responsive larger than 1400px screen
    */
@@ -2698,5 +2721,6 @@ footer {
   .banner-content {
     left: 110px;
     max-width: 460px;
+    background: rgba(255, 255, 255, 0.444);
   }
 }
