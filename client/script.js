@@ -212,16 +212,16 @@ let categoryContainer = document.getElementById("category-item-container");
 categoryItems.forEach((item) => {
   const htmlToAdd = `<li class="sidebar-menu-category">
     <button class="sidebar-accordion-menu" data-accordion-btn>
-      <div class="menu-name-flex">
+      <div class="menu-title-flex">
         <img
           src="./assets/images/icons/${item.img}.svg"
           alt="${item.name}"
           width="20"
           height="20"
-          class="menu-name-img"
+          class="menu-title-img"
         />
 
-        <p class="menu-name">${item.name}</p>
+        <p class="menu-title">${item.name}</p>
       </div>
 
       <div>
@@ -252,7 +252,7 @@ bestSellerItems.forEach((item, i) => {
 
     <div class="showcase-content">
       <a href="#">
-        <h4 class="showcase-name">${item.name}</h4>
+        <h4 class="showcase-title">${item.name}</h4>
       </a>
 
       <div class="showcase-rating">
@@ -288,7 +288,7 @@ newArrivalItems.forEach((item) => {
 
     <div class="showcase-content">
       <a href="#">
-        <h4 class="showcase-name">
+        <h4 class="showcase-title">
         ${item.name}
         </h4>
       </a>
@@ -321,7 +321,7 @@ trendingItems.forEach((item) => {
 
     <div class="showcase-content">
       <a href="#">
-        <h4 class="showcase-name">
+        <h4 class="showcase-title">
         ${item.name}
         </h4>
       </a>
@@ -381,7 +381,7 @@ newProducts.forEach((item) => {
       
   
       <a href="#">
-        <h3 class="showcase-name">${item.name}</h3>
+        <h3 class="showcase-title">${item.name}</h3>
       </a>
   
       <div class="showcase-rating">
@@ -396,11 +396,99 @@ newProducts.forEach((item) => {
         <p class="price">Rs.${item.newPrice}</p>
         <del>Rs.${item.oldPrice}</del>
       </div>
+      <button class="add-cart-btn" onclick="addToCart(this)" data-item=${param}>add to cart</button>
     </div>
   </div>`;
 
   newProductsContainer.insertAdjacentHTML("beforeend", htmlToAdd);
 });
+
+const dealContainer = document.getElementById("deal-container");
+const dealProduct = {
+  id: 21,
+  img: "shampoo",
+  name: "shampoo, conditioner & facewash packs",
+  oldPrice: "1049",
+  newPrice: "990",
+};
+
+const param = encodeURIComponent(JSON.stringify(dealProduct));
+const dealProductHTML = `<div class="showcase">
+<div class="showcase-banner">
+  <img
+    src="./assets/images/products/${dealProduct.img}.jpg"
+    alt=${dealProduct.title}
+    class="showcase-img"
+  />
+</div>
+
+<div class="showcase-content">
+  <div class="showcase-rating">
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon>
+    <ion-icon name="star-outline"></ion-icon>
+  </div>
+
+  <a href="#">
+    <h3 class="showcase-title">
+      ${dealProduct.name}
+    </h3>
+  </a>
+
+  <p class="showcase-desc">
+    Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor
+    dolor sit amet consectetur Lorem ipsum dolor
+  </p>
+
+  <div class="price-box">
+    <p class="price">Rs.${dealProduct.newPrice}</p>
+
+    <del>Rs.${dealProduct.oldPrice}</del>
+  </div>
+
+  <button class="add-cart-btn" onclick="addToCart(this)" data-item=${param}>add to cart</button>
+
+  <div class="showcase-status">
+    <div class="wrapper">
+      <p>already sold: <b>20</b></p>
+
+      <p>available: <b>40</b></p>
+    </div>
+
+    <div class="showcase-status-bar"></div>
+  </div>
+
+  <div class="countdown-box">
+    <p class="countdown-desc">Hurry Up! Offer ends in:</p>
+
+    <div class="countdown">
+      <div class="countdown-content">
+        <p class="display-number">360</p>
+
+        <p class="display-text">Days</p>
+      </div>
+
+      <div class="countdown-content">
+        <p class="display-number">24</p>
+        <p class="display-text">Hours</p>
+      </div>
+
+      <div class="countdown-content">
+        <p class="display-number">59</p>
+        <p class="display-text">Min</p>
+      </div>
+
+      <div class="countdown-content">
+        <p class="display-number">00</p>
+        <p class="display-text">Sec</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>`;
+dealContainer.insertAdjacentHTML("beforeend", dealProductHTML);
 
 function addToCart(event) {
   const str = event.getAttribute("data-item");
