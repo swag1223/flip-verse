@@ -68,3 +68,7 @@ function removeFromCart(event) {
     },
   }).showToast();
 }
+
+function gotoHome() {
+  window.location = window.location.origin;
+}

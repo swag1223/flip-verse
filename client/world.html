@@ -25,6 +25,7 @@
         overflow: hidden;
         touch-action: none;
       }
+
       #message {
         position: absolute;
         left: 50%;
@@ -86,21 +87,33 @@
         justify-content: space-between;
       }
 
+      a {
+        text-decoration: none;
+        color: white;
+      }
+
       #leave-world-btn {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 10px;
+        right: 10px;
+        background-color: orange;
+        padding: 10px;
+        width: fit-content;
+        font-size: x-large;
       }
 
       #add-to-cart-btn {
         position: absolute;
         left: 0;
         right: 0;
-        top: 5%;
+        top: 10%;
         margin: 0 auto;
         width: max-content;
         height: max-content;
-        padding: 5px;
+        padding: 8px;
+        background-color: yellow;
+        font-size: x-large;
+        font-weight: bold;
       }
 
       #send-btn {
@@ -130,7 +143,7 @@
       </form>
     </div>
 
-    <button id="add-to-cart-btn" class="hide">add</button>
+    <button id="add-to-cart-btn" class="hide"></button>
 
     <button id="leave-world-btn">
       <a href="/">Leave</a>

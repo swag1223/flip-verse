@@ -2,6 +2,7 @@ let products = {};
 let cart;
 let data = localStorage.getItem("cart");
 const USERNAME = localStorage.getItem("username");
+var cartBtn = document.getElementById("add-to-cart-btn");
 
 if (data) {
   cart = JSON.parse(data);
@@ -12,6 +13,7 @@ if (data) {
 function onFocus(e) {
   e.target.focus();
 }
+
 class Game {
   constructor() {
     if (!Detector.webgl) Detector.addGetWebGLMessage();
@@ -661,60 +663,11 @@ class Game {
 
     if (intersects.length > 0) {
       const object = intersects[0].object;
-      const btn = document.getElementById("add-to-cart-btn");
 
       if (object.isProduct) {
-        btn.classList.toggle("hide");
-        btn.innerText = `Add ${object.parentObj.name} to cart`;
-
-        if ("ontouchstart" in window) {
-          btn.addEventListener("touchstart", addToCart, {
-            passive: false,
-            capture: true,
-          });
-        } else {
-          btn.addEventListener("click", addToCart);
-        }
-
-        function addToCart() {
-          let alreadyPresent = false;
-          for (var i = 0; i < cart.length; i++) {
-            if (cart[i].name === object.parentObj.name) alreadyPresent = true;
-          }
-          if (!alreadyPresent) {
-            cart = [...cart, products[object.parentObj.id]];
-            localStorage.setItem("cart", JSON.stringify(cart));
-            player.emitAddedToCart(products[object.parentObj.id]);
-          }
-
-          console.log("after", cart);
-          Toastify({
-            text: alreadyPresent
-              ? "Item already in cart"
-              : "Item added to cart",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "center",
-            stopOnFocus: true,
-            style: {
-              background: alreadyPresent ? "red" : "green",
-              display: "flex",
-              width: "max-content",
-            },
-          }).showToast();
-          if ("ontouchstart" in window) {
-            btn.removeEventListener("touchstart", addToCart, {
-              passive: false,
-              capture: true,
-            });
-          } else {
-            btn.removeEventListener("click", addToCart);
-          }
-          btn.classList.toggle("hide");
-        }
+        showCartBtn(object, player);
       } else {
-        btn.classList.add("hide");
+        hideCartBtn();
       }
 
       const players = this.remotePlayers.filter(function (player) {
@@ -808,7 +761,7 @@ class Game {
       );
       const pos = this.player.object.position.clone();
       if (this.cameras.active == this.cameras.chat) {
-        pos.y += 200;
+        // pos.y += 200;
       } else {
         pos.y += 300;
       }
@@ -1010,7 +963,7 @@ class PlayerLocal extends Player {
 
     socket.on("show added to cart", function (data) {
       Toastify({
-        text: `${data.username} added ${data.product.name} to his cart`,
+        text: `${data.username} added ${data.product.name} to their cart`,
         duration: 3000,
         close: true,
         gravity: "top",
@@ -1030,7 +983,7 @@ class PlayerLocal extends Player {
       const player = game.getRemotePlayerById(data.id);
       game.speechBubble.player = player;
       game.chatSocketId = player.id;
-      game.activeCamera = game.cameras.chat;
+      game.activeCamera = game.cameras.back;
       game.speechBubble.update(data.message);
     });
 
@@ -1310,6 +1263,72 @@ class SpeechBubble {
         this.player.object.position.z
       );
       this.mesh.lookAt(pos);
+    }
+  }
+}
+
+function showCartBtn(object, player) {
+  cartBtn.innerText = `Add ${object.parentObj.name} to cart`;
+  cartBtn.classList.remove("hide");
+  //add event listener
+  if ("ontouchstart" in window) {
+    cartBtn.addEventListener(
+      "touchstart",
+      (addToCart = function () {
+        addItemToCart(object, player);
+      }),
+      {
+        passive: false,
+        capture: true,
+      }
+    );
+  } else {
+    cartBtn.addEventListener(
+      "click",
+      (addToCart = function () {
+        addItemToCart(object, player);
+      })
+    );
+  }
+}
+
+function addItemToCart(object, player) {
+  let alreadyPresent = false;
+  for (var i = 0; i < cart.length; i++) {
+    if (cart[i].name === object.parentObj.name) alreadyPresent = true;
+  }
+  if (!alreadyPresent) {
+    cart = [...cart, products[object.parentObj.id]];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    player.emitAddedToCart(products[object.parentObj.id]);
+  }
+  Toastify({
+    text: alreadyPresent ? "Item already in cart" : "Item added to cart",
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "center",
+    stopOnFocus: true,
+    style: {
+      background: alreadyPresent ? "red" : "green",
+      display: "flex",
+      width: "max-content",
+    },
+  }).showToast();
+  hideCartBtn();
+}
+
+function hideCartBtn() {
+  if (!cartBtn.classList.contains("hide")) {
+    cartBtn.classList.add("hide");
+    //remove evevnt listener
+    if ("ontouchstart" in window) {
+      cartBtn.removeEventListener("touchstart", addToCart, {
+        passive: false,
+        capture: true,
+      });
+    } else {
+      cartBtn.removeEventListener("click", addToCart);
     }
   }
 }

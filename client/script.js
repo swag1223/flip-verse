@@ -521,3 +521,7 @@ function addToCart(event) {
     },
   }).showToast();
 }
+
+function gotoCart() {
+  window.location = window.location.origin + "/cart";
+}
