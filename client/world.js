@@ -169,9 +169,8 @@ class Game {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
-    console.log(this.renderer);
     if (this.renderer.xr) this.renderer.xr.enabled = true;
-    if (this.renderer.vr) this.renderer.vr.enabled = true;
+    if (this.renderer.rr) this.renderer.vr.enabled = true;
     this.container.appendChild(this.renderer.domElement);
 
     const arBtn = ARButton.createButton(this.renderer);
