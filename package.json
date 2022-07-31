@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "flip-verse",
   "version": "0.0.1",
   "main": "app.js",
