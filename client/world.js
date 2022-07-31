@@ -169,6 +169,9 @@ class Game {
     this.renderer.shadowMap.enabled = true;
     this.container.appendChild(this.renderer.domElement);
 
+    console.log(window);
+    console.log("doc", document);
+
     if ("ontouchstart" in window) {
       document.addEventListener(
         "touchstart",
@@ -222,6 +225,7 @@ class Game {
         };
         object.position.set(6800, 30, -300);
         object.scale.set(0.3, 0.3, 0.3);
+        console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
@@ -241,6 +245,7 @@ class Game {
           object.rotation.y += 0.03;
         }
         animate();
+        console.log("chair", object);
         object.traverse(function (child) {
           child.parentObj = object;
           child.isProduct = true;
@@ -264,6 +269,7 @@ class Game {
             img: object.img,
           };
           object.position.set(700, 30, -500);
+          console.log(object);
 
           object.speechBubble = new SpeechBubble(
             game,
@@ -346,6 +352,7 @@ class Game {
         };
         object.position.set(8000, 20, -2000);
         object.scale.set(0.3, 0.3, 0.3);
+        console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
@@ -386,6 +393,7 @@ class Game {
         };
         object.position.set(5500, 20, -1000);
         object.scale.set(0.5, 0.5, 0.5);
+        console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
@@ -427,6 +435,7 @@ class Game {
         };
         object.position.set(1500, 20, -1000);
         object.scale.set(10, 10, 10);
+        console.log(object);
 
         object.speechBubble = new SpeechBubble(
           game,
@@ -677,6 +686,7 @@ class Game {
         this.chatSocketId = player.id;
 
         chat.classList.remove("hide");
+        console.log(chat.classList);
         // this.activeCamera = this.cameras.chat;
         document.getElementById("m").addEventListener("touchstart", onFocus, {
           passive: false,
@@ -690,6 +700,7 @@ class Game {
         // window.innerHeight - event.clientY > 40
         !shouldChatVisible
       ) {
+        console.log("delete");
         console.log("onMouseDown: No player found");
         if (this.speechBubble.mesh.parent !== null)
           this.speechBubble.mesh.parent.remove(this.speechBubble.mesh);
@@ -807,6 +818,7 @@ class Player {
     this.colour = colour;
     this.game = game;
     this.animations = this.game.animations;
+    console.log(this.id);
 
     const loader = new THREE.FBXLoader();
     const player = this;
@@ -918,6 +930,7 @@ class PlayerLocal extends Player {
     this.username = USERNAME;
 
     const player = this;
+    console.log("player", player);
     const socket = io.connect();
 
     socket.on("setId", function (data) {
