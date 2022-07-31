@@ -4,6 +4,11 @@ if (data) {
 }
 
 let cartContainer = document.getElementById("cart-container");
+if (cart.length < 1) {
+  cartContainer.innerHTML = `<h2 style="text-align:center">CART IS EMPTY</h2>`;
+  cartContainer.style.display = "flex";
+  cartContainer.style.justifyContent = "center";
+}
 cart.forEach((item) => {
   const newPrice = item.newPrice ? item.newPrice : item.price;
   const img = item.img ? item.img : item.img1;
