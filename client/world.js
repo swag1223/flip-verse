@@ -1,5 +1,3 @@
-import { ARButton } from "./libs/arbtn.js";
-
 let products = {};
 let cart;
 let data = localStorage.getItem("cart");
@@ -169,11 +167,7 @@ class Game {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
-    if (this.renderer.xr) this.renderer.xr.enabled = true;
     this.container.appendChild(this.renderer.domElement);
-
-    const arBtn = ARButton.createButton(this.renderer);
-    document.body.appendChild(arBtn);
 
     console.log(window);
     console.log("doc", document);
@@ -1338,5 +1332,3 @@ function hideCartBtn() {
     }
   }
 }
-
-let game = new Game();
