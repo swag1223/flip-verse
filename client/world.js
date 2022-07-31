@@ -1,5 +1,4 @@
-import { ARButton } from "./libs/arbtn.mjs";
-console.log(ARButton);
+import { ARButton } from "./libs/arbtn.js";
 
 let products = {};
 let cart;
