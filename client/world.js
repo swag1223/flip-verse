@@ -170,6 +170,7 @@ class Game {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
     if (this.renderer.xr) this.renderer.xr.enabled = true;
+    if (this.renderer.rr) this.renderer.vr.enabled = true;
     this.container.appendChild(this.renderer.domElement);
 
     const arBtn = ARButton.createButton(this.renderer);
