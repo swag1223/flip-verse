@@ -950,8 +950,12 @@ class PlayerLocal extends Player {
     });
 
     socket.on("show added to cart", function (data) {
+      const username =
+        data.username === "undefined" || data.username.trim().length === 0
+          ? player.id
+          : data.username;
       Toastify({
-        text: `${data.username} added ${data.product.name} to their cart`,
+        text: `${username} added ${data.product.name} to their cart`,
         duration: 3000,
         close: true,
         gravity: "top",
