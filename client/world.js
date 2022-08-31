@@ -169,9 +169,8 @@ export class Game {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
     this.container.appendChild(this.renderer.domElement);
-
-    document.body.appendChild(VRButton.createButton(this.renderer));
     this.renderer.xr.enabled = true;
+    document.body.appendChild(VRButton.createButton(this.renderer));
 
     if ("ontouchstart" in window) {
       document.addEventListener(
