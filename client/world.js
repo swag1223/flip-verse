@@ -1331,7 +1331,7 @@ function hideCartBtn() {
 }
 
 function getVRDisplays(onDisplay) {
-  console.log(navigator.getVRDisplays);
+  console.log(window.navigator);
   if ("getVRDisplays" in navigator) {
     navigator.getVRDisplays().then(function (displays) {
       onDisplay(displays[0]);
