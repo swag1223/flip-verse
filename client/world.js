@@ -1,3 +1,4 @@
+import { VRButton } from "./libs/VRButton.js";
 let products = {};
 let cart;
 let data = localStorage.getItem("cart");
@@ -14,7 +15,7 @@ function onFocus(e) {
   e.target.focus();
 }
 
-class Game {
+export class Game {
   constructor() {
     if (!Detector.webgl) Detector.addGetWebGLMessage();
 
@@ -168,6 +169,9 @@ class Game {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
     this.container.appendChild(this.renderer.domElement);
+
+    document.body.appendChild(VRButton.createButton(this.renderer));
+    this.renderer.xr.enabled = true;
 
     if ("ontouchstart" in window) {
       document.addEventListener(
