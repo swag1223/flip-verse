@@ -164,13 +164,6 @@ class Game {
     });
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-
-    this.renderer.vr.enabled = true;
-
-    getVRDisplays(function (display) {
-      this.renderer.vr.setDevice(display);
-    });
-
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
@@ -1327,14 +1320,5 @@ function hideCartBtn() {
     } else {
       cartBtn.removeEventListener("click", addToCart);
     }
-  }
-}
-
-function getVRDisplays(onDisplay) {
-  console.log(window.navigator);
-  if ("getVRDisplays" in navigator) {
-    navigator.getVRDisplays().then(function (displays) {
-      onDisplay(displays[0]);
-    });
   }
 }
