@@ -1287,14 +1287,14 @@ function showCartBtn(object, player) {
     );
   }
 
-  if ("ontouchstart" in window) {
-    arBtn.addEventListener("touchstart", openLink, {
-      passive: false,
-      capture: true,
-    });
-  } else {
-    arBtn.addEventListener("click", openLink);
-  }
+  // if ("ontouchstart" in window) {
+  //   arBtn.addEventListener("touchstart", openLink, {
+  //     passive: false,
+  //     capture: true,
+  //   });
+  // } else {
+  //   arBtn.addEventListener("click", openLink);
+  // }
 }
 
 function addItemToCart(object, player) {
@@ -1339,13 +1339,13 @@ function hideCartBtn() {
 
   if (!arBtn.classList.contains("hide")) {
     arBtn.classList.add("hide");
-    if ("ontouchstart" in window) {
-      arBtn.removeEventListener("touchstart", openLink, {
-        passive: false,
-        capture: true,
-      });
-    } else {
-      cartBtn.removeEventListener("click", openLink);
-    }
+    // if ("ontouchstart" in window) {
+    //   arBtn.removeEventListener("touchstart", openLink, {
+    //     passive: false,
+    //     capture: true,
+    //   });
+    // } else {
+    //   cartBtn.removeEventListener("click", openLink);
+    // }
   }
 }
