@@ -21,7 +21,9 @@ app.get("/cart", function (req, res) {
 });
 app.get("/:id", function (req, res) {
   var prodId = req.params.id;
-  res.sendFile(__dirname + `/client/${prodId}.html`);
+  prodId = prodId.toLowerCase();
+  console.log(prodId);
+  res.sendFile(__dirname + `/client/ARViews/${prodId}.html`);
 });
 
 io.sockets.on("connection", function (socket) {
