@@ -5,23 +5,6 @@ const USERNAME = localStorage.getItem("username");
 var cartBtn = document.getElementById("add-to-cart-btn");
 var arBtn = document.getElementById("view-in-ar-btn");
 
-if ("ontouchstart" in window) {
-  arBtn.addEventListener(
-    "touchstart",
-    () => {
-      window.open(window.location.origin + "/chair");
-    },
-    {
-      passive: false,
-      capture: true,
-    }
-  );
-} else {
-  arBtn.addEventListener("click", () => {
-    window.open(window.location.origin + "/chair");
-  });
-}
-
 if (data) {
   cart = JSON.parse(data);
 } else {
@@ -1275,6 +1258,10 @@ class SpeechBubble {
   }
 }
 
+function openLink() {
+  window.open(window.location.origin + "/chair");
+}
+
 function showCartBtn(object, player) {
   cartBtn.innerText = `Add ${object.parentObj.name} to cart`;
   cartBtn.classList.remove("hide");
@@ -1298,6 +1285,15 @@ function showCartBtn(object, player) {
         addItemToCart(object, player);
       })
     );
+  }
+
+  if ("ontouchstart" in window) {
+    arBtn.addEventListener("touchstart", openLink, {
+      passive: false,
+      capture: true,
+    });
+  } else {
+    arBtn.addEventListener("click", openLink);
   }
 }
 
@@ -1343,5 +1339,13 @@ function hideCartBtn() {
 
   if (!arBtn.classList.contains("hide")) {
     arBtn.classList.add("hide");
+    if ("ontouchstart" in window) {
+      arBtn.removeEventListener("touchstart", openLink, {
+        passive: false,
+        capture: true,
+      });
+    } else {
+      cartBtn.removeEventListener("click", openLink);
+    }
   }
 }
