@@ -19,11 +19,8 @@ app.get("/world", function (req, res) {
 app.get("/cart", function (req, res) {
   res.sendFile(__dirname + "/client/cart.html");
 });
-app.get("/:id", function (req, res) {
-  var prodId = req.params.id;
-  prodId = prodId.toLowerCase();
-  console.log(prodId);
-  res.sendFile(__dirname + `/client/ARViews/${prodId}.html`);
+app.get("/Chair", function (req, res) {
+  res.sendFile(__dirname + `/client/ARViews/chair.html`);
 });
 
 io.sockets.on("connection", function (socket) {

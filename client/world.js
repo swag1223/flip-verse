@@ -5,6 +5,23 @@ const USERNAME = localStorage.getItem("username");
 var cartBtn = document.getElementById("add-to-cart-btn");
 var arBtn = document.getElementById("view-in-ar-btn");
 
+if ("ontouchstart" in window) {
+  arBtn.addEventListener(
+    "touchstart",
+    () => {
+      window.open(window.location.origin + "/chair");
+    },
+    {
+      passive: false,
+      capture: true,
+    }
+  );
+} else {
+  arBtn.addEventListener("click", () => {
+    window.open(window.location.origin + "/chair");
+  });
+}
+
 if (data) {
   cart = JSON.parse(data);
 } else {
@@ -1282,26 +1299,6 @@ function showCartBtn(object, player) {
       })
     );
   }
-
-  if ("ontouchstart" in window) {
-    arBtn.addEventListener(
-      "touchstart",
-      (gotoLink = function () {
-        openLink(object, player);
-      }),
-      {
-        passive: false,
-        capture: true,
-      }
-    );
-  } else {
-    arBtn.addEventListener(
-      "click",
-      (gotoLink = function () {
-        openLink(object, player);
-      })
-    );
-  }
 }
 
 function addItemToCart(object, player) {
@@ -1346,19 +1343,5 @@ function hideCartBtn() {
 
   if (!arBtn.classList.contains("hide")) {
     arBtn.classList.add("hide");
-    //remove evevnt listener
-    if ("ontouchstart" in window) {
-      arBtn.removeEventListener("touchstart", gotoLink, {
-        passive: false,
-        capture: true,
-      });
-    } else {
-      arBtn.removeEventListener("click", gotoLink);
-    }
   }
-}
-
-function openLink(object, player) {
-  var base_url = window.location.origin;
-  window.open(base_url + "/" + object.parentObj.name);
 }
