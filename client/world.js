@@ -3,6 +3,7 @@ let cart;
 let data = localStorage.getItem("cart");
 const USERNAME = localStorage.getItem("username");
 var cartBtn = document.getElementById("add-to-cart-btn");
+var arBtn = document.getElementById("view-in-ar-btn");
 
 if (data) {
   cart = JSON.parse(data);
@@ -1260,6 +1261,7 @@ class SpeechBubble {
 function showCartBtn(object, player) {
   cartBtn.innerText = `Add ${object.parentObj.name} to cart`;
   cartBtn.classList.remove("hide");
+  arBtn.classList.remove("hide");
   //add event listener
   if ("ontouchstart" in window) {
     cartBtn.addEventListener(
@@ -1277,6 +1279,26 @@ function showCartBtn(object, player) {
       "click",
       (addToCart = function () {
         addItemToCart(object, player);
+      })
+    );
+  }
+
+  if ("ontouchstart" in window) {
+    arBtn.addEventListener(
+      "touchstart",
+      (gotoLink = function () {
+        openLink(object, player);
+      }),
+      {
+        passive: false,
+        capture: true,
+      }
+    );
+  } else {
+    arBtn.addEventListener(
+      "click",
+      (gotoLink = function () {
+        openLink(object, player);
       })
     );
   }
@@ -1321,4 +1343,22 @@ function hideCartBtn() {
       cartBtn.removeEventListener("click", addToCart);
     }
   }
+
+  if (!arBtn.classList.contains("hide")) {
+    arBtn.classList.add("hide");
+    //remove evevnt listener
+    if ("ontouchstart" in window) {
+      arBtn.removeEventListener("touchstart", gotoLink, {
+        passive: false,
+        capture: true,
+      });
+    } else {
+      arBtn.removeEventListener("click", gotoLink);
+    }
+  }
+}
+
+function openLink(object, player) {
+  var base_url = window.location.origin;
+  window.open(base_url + "/" + object.parentObj.name);
 }

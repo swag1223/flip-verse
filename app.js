@@ -19,8 +19,9 @@ app.get("/world", function (req, res) {
 app.get("/cart", function (req, res) {
   res.sendFile(__dirname + "/client/cart.html");
 });
-app.get("/headphone", function (req, res) {
-  res.sendFile(__dirname + "/client/headphone.html");
+app.get("/:id", function (req, res) {
+  var prodId = req.params.id;
+  res.sendFile(__dirname + `/client/${prodId}.html`);
 });
 
 io.sockets.on("connection", function (socket) {
