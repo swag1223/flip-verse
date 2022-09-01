@@ -19,6 +19,9 @@ app.get("/world", function (req, res) {
 app.get("/cart", function (req, res) {
   res.sendFile(__dirname + "/client/cart.html");
 });
+app.get("/headphone", function (req, res) {
+  res.sendFile(__dirname + "/client/headphone.html");
+});
 
 io.sockets.on("connection", function (socket) {
   socket.userData = { x: 0, y: 0, z: 0, heading: 0 }; //Default values;
