@@ -5,6 +5,16 @@ if (data) {
   cart = [];
 }
 
+let coinsData = localStorage.getItem("coins");
+if (coinsData) {
+  console.log(coinsData);
+} else {
+  localStorage.setItem("coins", 0);
+}
+
+let coinsDiv = document.querySelector(".coin-count");
+coinsDiv.innerText = coinsData;
+
 const cartCount = [...document.getElementsByClassName("count")];
 cartCount.forEach((item) => {
   item.innerHTML = cart.length;

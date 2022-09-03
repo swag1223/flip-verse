@@ -4,6 +4,33 @@ let data = localStorage.getItem("cart");
 const USERNAME = localStorage.getItem("username");
 var cartBtn = document.getElementById("add-to-cart-btn");
 var arBtn = document.getElementById("view-in-ar-btn");
+var coinCount = document.querySelector(".coin-count");
+console.log(coinCount);
+
+var coins = localStorage.getItem("coins");
+coins = parseInt(coins);
+
+coinCount.innerText = coins;
+
+setInterval(() => {
+  coins += 1;
+  coinCount.innerText = coins;
+  localStorage.setItem("coins", coins);
+
+  Toastify({
+    text: `Hurray! You earned a SuperCoin`,
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "center",
+    stopOnFocus: true,
+    style: {
+      background: "purple",
+      display: "flex",
+      width: "max-content",
+    },
+  }).showToast();
+}, 30000);
 
 if (data) {
   cart = JSON.parse(data);

@@ -290,6 +290,11 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 10px;
 }
 
+.coin-count {
+  font-size: 26px;
+  color: var(--eerie-black);
+}
+
 .mobile-bottom-navigation .count {
   background: var(--bittersweet);
   color: var(--white);
