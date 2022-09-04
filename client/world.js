@@ -5,7 +5,6 @@ const USERNAME = localStorage.getItem("username");
 var cartBtn = document.getElementById("add-to-cart-btn");
 var arBtn = document.getElementById("view-in-ar-btn");
 var coinCount = document.querySelector(".coin-count");
-console.log(coinCount);
 
 var coins = localStorage.getItem("coins");
 coins = parseInt(coins);
@@ -191,7 +190,7 @@ class Game {
       game: this,
     });
 
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer = new THREE.WebGLRenderer({ antialias: false });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
