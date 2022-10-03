@@ -1039,6 +1039,11 @@ class PlayerLocal extends Player {
       return false;
     });
 
+    $("#view-in-ar-btn").bind("touchstart click", function (e) {
+      window.open("https://flip-verse.herokuapp.com/chair");
+      return false;
+    });
+
     this.socket = socket;
     this.player = player;
   }
