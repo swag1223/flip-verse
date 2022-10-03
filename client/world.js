@@ -1296,13 +1296,15 @@ function showCartBtn(object, player) {
   if ("ontouchstart" in window) {
     arBtn.addEventListener(
       "touchstart",
-      () => {
+      (event) => {
+        event.stopPropagation();
+        event.preventDefault();
         window.open("https://flip-verse.herokuapp.com/chair");
+      },
+      {
+        passive: false,
+        capture: true,
       }
-      // {
-      //   passive: false,
-      //   capture: true,
-      // }
     );
   } else {
     arBtn.addEventListener("click", () => {
