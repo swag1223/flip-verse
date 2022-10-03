@@ -1372,7 +1372,7 @@ function hideCartBtn() {
   }
 
   if (!arBtn.classList.contains("hide")) {
-    arBtn.classList.add("hide");
+    // arBtn.classList.add("hide");
     // if ("ontouchstart" in window) {
     //   arBtn.removeEventListener("touchstart", openLink, {
     //     passive: false,
