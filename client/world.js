@@ -1300,11 +1300,11 @@ function showCartBtn(object, player) {
         event.stopPropagation();
         event.preventDefault();
         window.open("https://flip-verse.herokuapp.com/chair");
-      },
-      {
-        passive: false,
-        capture: true,
       }
+      // {
+      //   passive: false,
+      //   capture: true,
+      // }
     );
   } else {
     arBtn.addEventListener("click", () => {
