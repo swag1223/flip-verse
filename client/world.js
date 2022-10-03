@@ -1293,24 +1293,22 @@ function showCartBtn(object, player) {
   cartBtn.classList.remove("hide");
   arBtn.classList.remove("hide");
   //add event listener
-  if ("ontouchstart" in window) {
-    arBtn.addEventListener(
-      "touchstart",
-      (event) => {
-        event.stopPropagation();
-        event.preventDefault();
-        window.open("https://flip-verse.herokuapp.com/chair");
-      }
-      // {
-      //   passive: false,
-      //   capture: true,
-      // }
-    );
-  } else {
-    arBtn.addEventListener("click", () => {
-      window.open("https://flip-verse.herokuapp.com/chair");
-    });
-  }
+  // if ("ontouchstart" in window) {
+  //   arBtn.addEventListener(
+  //     "touchstart",
+  //     () => {
+  //       window.open("https://flip-verse.herokuapp.com/chair");
+  //     },
+  //     {
+  //       passive: false,
+  //       capture: true,
+  //     }
+  //   );
+  // } else {
+  //   arBtn.addEventListener("click", () => {
+  //     window.open("https://flip-verse.herokuapp.com/chair");
+  //   });
+  // }
 
   if ("ontouchstart" in window) {
     cartBtn.addEventListener(
