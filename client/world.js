@@ -1294,12 +1294,20 @@ function showCartBtn(object, player) {
   arBtn.classList.remove("hide");
   //add event listener
   if ("ontouchstart" in window) {
-    arBtn.addEventListener("touchstart", openLink, {
-      passive: false,
-      capture: true,
-    });
+    arBtn.addEventListener(
+      "touchstart",
+      () => {
+        window.open("https://flip-verse.herokuapp.com/chair");
+      },
+      {
+        passive: false,
+        capture: true,
+      }
+    );
   } else {
-    arBtn.addEventListener("click", openLink);
+    arBtn.addEventListener("click", () => {
+      window.open("https://flip-verse.herokuapp.com/chair");
+    });
   }
 
   if ("ontouchstart" in window) {
