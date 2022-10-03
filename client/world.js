@@ -1039,11 +1039,6 @@ class PlayerLocal extends Player {
       return false;
     });
 
-    $("#view-in-ar-btn").bind("touchstart click", function (e) {
-      window.open("https://flip-verse.herokuapp.com/chair");
-      return false;
-    });
-
     this.socket = socket;
     this.player = player;
   }
@@ -1297,23 +1292,15 @@ function showCartBtn(object, player) {
   cartBtn.innerText = `Add ${object.parentObj.name} to cart`;
   cartBtn.classList.remove("hide");
   arBtn.classList.remove("hide");
-  //add event listener
-  // if ("ontouchstart" in window) {
-  //   arBtn.addEventListener(
-  //     "touchstart",
-  //     () => {
-  //       window.open("https://flip-verse.herokuapp.com/chair");
-  //     },
-  //     {
-  //       passive: false,
-  //       capture: true,
-  //     }
-  //   );
-  // } else {
-  //   arBtn.addEventListener("click", () => {
-  //     window.open("https://flip-verse.herokuapp.com/chair");
-  //   });
-  // }
+  // add event listener
+  if ("ontouchstart" in window) {
+    arBtn.addEventListener("touchstart", openLink, {
+      passive: false,
+      capture: true,
+    });
+  } else {
+    arBtn.addEventListener("click", openLink);
+  }
 
   if ("ontouchstart" in window) {
     cartBtn.addEventListener(
@@ -1378,14 +1365,14 @@ function hideCartBtn() {
 
   if (!arBtn.classList.contains("hide")) {
     arBtn.classList.add("hide");
-    // if ("ontouchstart" in window) {
-    //   arBtn.removeEventListener("touchstart", openLink, {
-    //     passive: false,
-    //     capture: true,
-    //   });
-    // } else {
-    //   cartBtn.removeEventListener("click", openLink);
-    // }
+    if ("ontouchstart" in window) {
+      arBtn.removeEventListener("touchstart", openLink, {
+        passive: false,
+        capture: true,
+      });
+    } else {
+      cartBtn.removeEventListener("click", openLink);
+    }
   }
 }
 
