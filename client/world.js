@@ -190,7 +190,7 @@ class Game {
       game: this,
     });
 
-    this.renderer = new THREE.WebGLRenderer({ antialias: false });
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.shadowMap.enabled = true;
@@ -1294,6 +1294,15 @@ function showCartBtn(object, player) {
   arBtn.classList.remove("hide");
   //add event listener
   if ("ontouchstart" in window) {
+    arBtn.addEventListener("touchstart", openLink, {
+      passive: false,
+      capture: true,
+    });
+  } else {
+    arBtn.addEventListener("click", openLink);
+  }
+
+  if ("ontouchstart" in window) {
     cartBtn.addEventListener(
       "touchstart",
       (addToCart = function () {
@@ -1312,15 +1321,6 @@ function showCartBtn(object, player) {
       })
     );
   }
-
-  // if ("ontouchstart" in window) {
-  //   arBtn.addEventListener("touchstart", openLink, {
-  //     passive: false,
-  //     capture: true,
-  //   });
-  // } else {
-  //   arBtn.addEventListener("click", openLink);
-  // }
 }
 
 function addItemToCart(object, player) {
@@ -1374,4 +1374,8 @@ function hideCartBtn() {
     //   cartBtn.removeEventListener("click", openLink);
     // }
   }
+}
+
+function openLink() {
+  window.open("https://flip-verse.herokuapp.com/chair");
 }
