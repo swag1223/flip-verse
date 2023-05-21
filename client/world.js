@@ -1377,5 +1377,6 @@ function hideCartBtn() {
 }
 
 function openLink() {
-  window.open("https://flip-verse.herokuapp.com/chair");
+  var base_url = window.location.origin;
+  window.open(`${base_url}/chair`);
 }
