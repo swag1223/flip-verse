@@ -5,7 +5,7 @@ const io = require("socket.io")(http);
 require("dotenv").config();
 
 const PORT = process.env.PORT || 2002;
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(__dirname + '/client'));
 // app.use(express.static("./client"));
 app.use(express.static("./client/libs"));
 app.use(express.static("./client/v3"));
